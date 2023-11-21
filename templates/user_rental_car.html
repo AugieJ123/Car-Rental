@@ -1,0 +1,41 @@
+<!-- user_rented_cars.html -->
+{% extends 'base.html' %}
+
+{% block title %}Your Rented Cars{% endblock %}
+
+{% block template %}
+
+{% include 'navbar.html' %}
+
+<div class="container mt-4">
+    <h2>Your Rented Cars</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Car Name</th>
+                <th scope="col">Car Brand</th>
+                <th scope="col">Car Model</th>
+                <th scope="col">Rent Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rental in rented_cars %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ rental.car.name }}</td>
+                <td>{{ rental.car.brand }}</td>
+                <td>{{ rental.car.model }}</td>
+                <td>{{ rental.rental_date }}</td>
+                <td>
+                    <form method="post" action="{% url 'cancel_rent' rental.id %}" class="cancel-rent-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Cancel Rent</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

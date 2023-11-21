@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block template %}
+
+{% include 'navbar.html' %}
+
+{% if messages %}
+<div class="container mt-4">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<section class="py-lg-18 py-10 bg-auto bg-light">
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="row justify-content-center">
+            <div class="col-xl-7 col-lg-7 col-md-12">
+                <div class="py-8 py-lg-0 text-center mt-5">
+                    <h1 class="display-3 fw-bold mb-5 text-primary">
+                        <span class="text-dark px-3 px-md-0">
+                            Drive Your
+                        </span>
+                        <span class="headingTyped text-primary"> Adventure</span>
+                    </h1>
+
+                    <p class="mb-5 fs-4 text-dark">
+                        Embark on unforgettable journeys with our diverse fleet of vehicles. 
+                        Whether you're planning a road trip, a weekend getaway, or a business meeting, 
+                        find the perfect ride to match your style and needs. Your next adventure starts here.
+                    </p>
+
+                    <a href="{% url 'car_list' %}" class="btn btn-primary mb-5">Rent a car now</a>
+
+                    <div class="mt-8 mb-4">
+                        <ul class="list-inline">
+                            <li class="list-inline-item text-dark fw-semibold lh-1 fs-6 me-3 mb-2 mb-md-0">
+                                <span class="icon-shape icon-xs rounded-circle bg-light-success text-center me-2">
+                                    <i class="mdi mdi-check text-success "></i>
+                                </span>
+                                <span class="align-middle">30,000 Premium Rentals</span>
+                            </li>
+                            <li class="list-inline-item text-dark fw-semibold lh-1 fs-6 me-3 mb-2 mb-md-0">
+                                <span class="icon-shape icon-xs rounded-circle bg-light-success text-center me-2">
+                                    <i class="mdi mdi-check text-success "></i>
+                                </span>
+                                <span class="align-middle">Expert Assistance</span>
+                            </li>
+                            <li class="list-inline-item text-dark fw-semibold lh-1 fs-6">
+                                <span class="icon-shape icon-xs rounded-circle bg-light-success text-center me-2">
+                                    <i class="mdi mdi-check text-success "></i>
+                                </span>
+                                <span class="align-middle">Enjoy a Lifetime of Driving Experiences.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Gallery -->
+<div class="container">
+    <div class="row">
+        <h2 class="mt-5 mb-5">Gallery</h2>
+        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+            <img src="https://cdn.motor1.com/images/mgl/2NLKbB/s4/2024-mercedes-amg-gt63-first-drive-review.webp"
+                class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+
+            <img src="https://cdn.motor1.com/images/mgl/N7jxG/s3/2022-jeep-grand-wagoneer-exterior-front-quarter.webp"
+                class="w-100 shadow-1-strong rounded mb-4" alt="Wintry Mountain Landscape" />
+        </div>
+
+        <div class="col-lg-4 mb-4 mb-lg-0">
+            <img src="https://cdn.motor1.com/images/mgl/KbJB3A/s4/bmw-concept-xm-exterior.webp"
+                class="w-100 shadow-1-strong rounded mb-4" alt="Mountains in the Clouds" />
+
+            <img src="https://cdn.motor1.com/images/mgl/7xvv6/s3/bmw-3-series.webp"
+                class="w-100 shadow-1-strong rounded mb-4" alt="Boat on Calm Water" />
+        </div>
+
+        <div class="col-lg-4 mb-4 mb-lg-0">
+            <img src="https://cdn.motor1.com/images/mgl/AeNQL/s3/bmw-8-series-coupe.webp"
+                class="w-100 shadow-1-strong rounded mb-4" alt="Waves at Sea" />
+
+            <img src="https://i.ytimg.com/vi/d2paYnnA5Y8/maxresdefault.jpg"
+                class="w-100 shadow-1-strong rounded mb-4" alt="Yosemite National Park" />
+        </div>
+    </div>
+</div>
+
+<!-- Gallery -->
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row align-items-center g-0 border-top py-2">
+            <!-- Desc -->
+            <div class="col-md-6 col-12 text-center text-md-start">
+                <span>© <span id="copyright">
+                        <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>
+                    </span>Car Rental. All Rights Reserved.</span>
+            </div>
+            <!-- Links -->
+            <div class="col-12 col-md-6">
+                <nav class="nav nav-footer justify-content-center justify-content-md-end">
+                    <a class="nav-link active ps-0" href="#">Privacy</a>
+                    <a class="nav-link" href="#">Terms </a>
+                    <a class="nav-link" href="#">Feedback</a>
+                    <a class="nav-link" href="#">Support</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+{% endblock %}

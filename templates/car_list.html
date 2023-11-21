@@ -1,0 +1,96 @@
+<!-- car_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Cars{% endblock %}
+
+
+{% block template %}
+
+{% include 'navbar.html' %}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between mt-5 mb-5">
+        <h2>All Cars</h2>
+        {% if user.is_authenticated and user.is_staff %}
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Add New Car
+        </button>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add a car</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-body mx-3">
+                            <form method="post" action="{% url 'add_car' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="md-form mb-2">
+                                    <label for="car_name">Car Name</label>
+                                    <input type="text" id="id_name" name="name" class="form-control validate">
+                                </div>
+                                <div class="md-form mb-2">
+                                    <label for="car_brand">Car Brand</label>
+                                    <input type="text" id="id_brand" name="brand" class="form-control validate">
+                                </div>
+                                <div class="md-form mb-2">
+                                    <label for="car_model">Car Model</label>
+                                    <input type="text" id="id_model" name="model" class="form-control validate">
+                                </div>
+                                <div class="md-form mb-2">
+                                    <label for="car_price">Car Price</label>
+                                    <input type="number" id="id_price" name="price" class="form-control validate">
+                                </div>
+                                <div class="form-check mb-5">
+                                    <input type="checkbox" class="form-check-input" id="id_available" name="available">
+                                    <label class="form-check-label" for="car_available">Available</label>
+                                </div>
+                                <div class="md-form mb-2">
+                                    <label for="car_image">Car Image</label>
+                                    <input type="file" id="id_image" name="image" class="form-control-file validate">
+                                </div>
+        
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary">Add Car</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        {% for car in cars %}
+        <div class="col-md-4 mb-4">
+            <div class="card rounded shadow-sm border-0">
+                {% if car.image %}
+                <img src="{{ car.image.url }}" class="card-img-top" alt="{{ car.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ car.name }} {{ car.brand }}</h5>
+                    <p class="card-text"> <strong>Model:</strong> {{ car.model }}</p>
+                    <p class="card-text"><strong>Price:</strong> ${{ car.price }}/week</p>
+                    <p class="card-text">
+                        <!-- <strong>Status:</strong> -->
+                        {% if car.available %}
+                        <form method="post" action="{% url 'rent_car' car.id %}" class="rent-form">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Rent Now</button>
+                        </form>
+                        {% else %}
+                        <a class="text-danger">Not Available for Rent</a>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
